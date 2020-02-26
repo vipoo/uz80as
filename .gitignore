@@ -21,3 +21,7 @@ stamp-h1
 /doc/*.1
 /src/.deps
 /src/uz80as
+
+doc/copyright.texi
+src/target/.deps/
+src/target/.dirstamp
