@@ -197,7 +197,7 @@ static struct macro *pplookup(const char *p, const char *q)
 	for (nod = s_mactab[h]; nod != NULL; nod = nod->next)
 		if (scmp(p, q, nod->name) == 0)
 			return nod;
-	
+
 	return nod;
 }
 
@@ -239,7 +239,7 @@ static char *expandid(char *dp, char *dq, struct macro *pps, const char *args)
 	return dp;
 }
 
-/* 
+/*
  * If 'p' points the the start of an argument list, that is, '(',
  * point to one character past the first ')' after 'p'.
  * Else return 'p'.
@@ -357,7 +357,7 @@ static int isppid(const char *p, const char *ucq)
  * [idp, idq[ is the macro id.
  * [ap, aq[ is the macro argument list. If ap == aq there are no arguments.
  * [tp, tq[ is the macro text.
- */ 
+ */
 static void define(const char *idp, const char *idq,
 		   const char *tp, const char *tq,
 		   const char *ap, const char *aq)
@@ -424,7 +424,7 @@ static void defcont(const char *p, const char *q)
 	copychars(nt + len, p, q);
 }
 
-/* 
+/*
  * If 'p' points to a valid identifier start, go to the end of the identifier.
  * Else return 'p'.
  */

@@ -59,7 +59,9 @@ static const char *d_text(const char *);
 static const char *d_title(const char *);
 static const char *d_word(const char *);
 
-/* 
+int verbose;
+
+/*
  * Directives.
  * This table must be sorted, to allow for binary search.
  */ 
@@ -966,6 +968,7 @@ static void install_predefs(void)
 /* Do a pass through the source. */
 static void dopass(const char *fname)
 {
+	if (verbose) fprintf(stderr, "start pass %d\n", s_pass);
 	/* Fill memory with default value. */
 	if ((s_pass == 0 && s_mem_fillval != 0) || s_pass > 0) {
 		memset(s_mem, s_mem_fillval, sizeof(s_mem));
@@ -1044,7 +1047,7 @@ void uz80as(void)
 			wprint(_("no .END statement in the source\n"));
 		}
 		if (s_nerrors == 0) {
-			printf("Pass %d completed.\n", s_pass + 1);
+			if (verbose) printf("Pass %d completed.\n", s_pass + 1);
 		}
 	}
 

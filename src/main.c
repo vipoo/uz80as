@@ -92,6 +92,7 @@ static void print_help(const char *argv0)
 "\n"
 "Options:\n"
 "  -h, --help           Display this help and exit.\n"
+"  -V, --verbose        be chatty.\n"
 "  -v, --version        Output version information and exit.\n"
 "  -l, --license        Display the license text and exit.\n"
 "  -d, --define=MACRO   Define a macro.\n"
@@ -216,6 +217,7 @@ int main(int argc, char *argv[])
 		{ "version", 0, 'v' },
 		{ "print-table", 1, 0 },
 		{ "print-delta", 1, 0 },
+		{ "verbose", 0, 'V' },
 		{ NULL, 0, 0 },
 	};
 
@@ -223,6 +225,9 @@ int main(int argc, char *argv[])
 	do {
 		c = ngetopt_next(&ngo);
 		switch (c) {
+		case 'V':
+			verbose++;
+			break;
 		case 'v':
 			print_version(stdout);
 			exit(EXIT_SUCCESS);
