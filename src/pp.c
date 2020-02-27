@@ -36,7 +36,7 @@
 #define MACTABSZ	241
 
 /* Max number of macro arguments. */
-#define	NPARAMS		10
+#define	NPARAMS		20
 
 #define DEFINESTR	"DEFINE"
 #define DEFCONTSTR	"DEFCONT"
