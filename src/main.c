@@ -192,11 +192,24 @@ int main(int argc, char *argv[]) {
   int            c;
   struct ngetopt ngo;
 
+  /* clang-format off */
   static struct ngetopt_opt ops[] = {
-      {"define", 1, 'd'}, {"extended", 0, 'x'},     {"list-targets", 0, 'e'}, {"fill", 1, 'f'},      {"help", 0, 'h'},      {"license", 0, 'l'}, {"quiet", 0, 'q'},
-      {"target", 1, 't'}, {"undocumented", 0, 'u'}, {"version", 0, 'v'},      {"print-table", 1, 0}, {"print-delta", 1, 0}, {"verbose", 0, 'V'}, {NULL, 0, 0},
+    { "define",       1, 'd' },
+    { "extended",     0, 'x' },
+    { "list-targets", 0, 'e' },
+    { "fill",         1, 'f' },
+    { "help",         0, 'h' },
+    { "license",      0, 'l' },
+    { "quiet",        0, 'q' },
+    { "target",       1, 't' },
+    { "undocumented", 0, 'u' },
+    { "version",      0, 'v' },
+    { "print-table",  1, 0   },
+    { "print-delta",  1, 0   },
+    { "verbose",      0, 'V' },
+    { NULL,           0, 0   }
   };
-
+  /* clang-format on */
   ngetopt_init(&ngo, argc, argv, ops);
   do {
     c = ngetopt_next(&ngo);

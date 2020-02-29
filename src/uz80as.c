@@ -67,14 +67,38 @@ int verbose;
  * Directives.
  * This table must be sorted, to allow for binary search.
  */
+/* clang-format off */
 static struct direc {
   const char *name;
   const char *(*fun)(const char *);
 } s_directab[] = {
-    {"BLOCK", d_block}, {"BYTE", d_byte},     {"CHK", d_chk},   {"CODES", d_codes}, {"DB", d_byte},         {"DW", d_word},       {"ECHO", d_echo},       {"EJECT", d_eject},     {"END", d_end},
-    {"EQU", d_equ},     {"EXPORT", d_export}, {"FILL", d_fill}, {"LIST", d_list},   {"LSFIRST", d_lsfirst}, {"MODULE", d_module}, {"MSFIRST", d_msfirst}, {"NOCODES", d_nocodes}, {"NOLIST", d_nolist},
-    {"NOPAGE", d_null}, {"ORG", d_org},       {"PAGE", d_null}, {"SET", d_set},     {"TEXT", d_text},       {"TITLE", d_title},   {"WORD", d_word},
+    { "BLOCK",    d_block   },
+    { "BYTE",     d_byte    },
+    { "CHK",      d_chk     },
+    { "CODES",    d_codes   },
+    { "DB",       d_byte    },
+    { "DW",       d_word    },
+    { "ECHO",     d_echo    },
+    { "EJECT",    d_eject   },
+    { "END",      d_end     },
+    { "EQU",      d_equ     },
+    { "EXPORT",   d_export  },
+    { "FILL",     d_fill    },
+    { "LIST",     d_list    },
+    { "LSFIRST",  d_lsfirst },
+    { "MODULE",   d_module  },
+    { "MSFIRST",  d_msfirst },
+    { "NOCODES",  d_nocodes },
+    { "NOLIST",   d_nolist  },
+    { "NOPAGE",   d_null    },
+    { "ORG",      d_org     },
+    { "PAGE",     d_null    },
+    { "SET",      d_set     },
+    { "TEXT",     d_text    },
+    { "TITLE",    d_title   },
+    { "WORD",     d_word    },
 };
+/* clang-format on */
 
 /* The target. */
 const struct target *s_target;
