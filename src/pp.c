@@ -405,6 +405,7 @@ static void defcont(const char *p, const char *q) {
   len = strlen(s_lastmac->text);
   nt  = erealloc(s_lastmac->text, (q - p) + len + 1);
   copychars(nt + len, p, q);
+  s_lastmac->text = nt;
 }
 
 /*

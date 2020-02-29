@@ -3,4 +3,9 @@
 0003   0000             VALUE	.EQU	123
 0004   0000             VALUE	.SET	124
 0005   0000             VALUE	.SET	125
-0006   0000             	.END
+0006   0000             
+0007   0000             #DEFINE multilinemacro(str)     LD      DE, str
+0008   0000             #DEFCONT \                      LD      C, 09H
+0009   0000             #DEFCONT \                      CALL    0005H
+0010   0000             
+0011   0000             	.END
