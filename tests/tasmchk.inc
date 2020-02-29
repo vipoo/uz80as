@@ -5,10 +5,15 @@ obj="$builddir"/$nom.obj
 lst="$builddir"/$nom.lst
 ltp="$builddir"/$nom.ltp
 
+rm -f $obj
+
 $uz80as $asm
 
 tr -d '\r' <$lst >$ltp
 mv -f $ltp $lst
 rm -f $ltp
 
-cmp $obj $bok && diff $lst $lok && rm -f $obj $lst
+set -e
+cmp $obj $bok || (echo "\nObject files are different"; exit 1)
+diff -w $lst $lok
+rm -f $obj $lst

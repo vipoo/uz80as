@@ -8,6 +8,8 @@ err="$builddir"/$nom.err
 ltp="$builddir"/$nom.ltp
 etp="$builddir"/$nom.etp
 
+rm -f $obj
+
 $uz80as $asm 2>$etp
 
 # Remove \r and remove leading path in error strings.
@@ -20,4 +22,8 @@ tr -d '\r' <$lst >$ltp
 mv -f $ltp $lst
 rm -f $ltp
 
-test ! -f $obj && diff $err $eok && diff $lst $lok && rm -f $err $lst
+set -e
+test ! -f $obj || (echo "\nFile $obj was not removed"; exit 1)
+diff -w $err $eok
+diff -w $lst $lok
+rm -f $err $lst
