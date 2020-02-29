@@ -7,10 +7,11 @@ ltp="$builddir"/$nom.ltp
 
 rm -f $obj
 
-$uz80as $asm
 echo
 echo "(cd \"$(pwd)\" && $uz80as $asm)"
 echo
+
+$uz80as $asm
 tr -d '\r' <$lst >$ltp
 mv -f $ltp $lst
 rm -f $ltp

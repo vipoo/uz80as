@@ -38,22 +38,23 @@
 #include <string.h>
 #endif
 
-static const char *d_null(const char *);
 static const char *d_block(const char *);
 static const char *d_byte(const char *);
 static const char *d_chk(const char *);
 static const char *d_codes(const char *);
 static const char *d_echo(const char *);
 static const char *d_eject(const char *);
-static const char *d_export(const char *);
 static const char *d_end(const char *);
 static const char *d_equ(const char *);
+static const char *d_export(const char *);
 static const char *d_fill(const char *);
 static const char *d_list(const char *);
 static const char *d_lsfirst(const char *);
+static const char *d_module(const char *);
 static const char *d_msfirst(const char *);
 static const char *d_nocodes(const char *);
 static const char *d_nolist(const char *);
+static const char *d_null(const char *);
 static const char *d_org(const char *);
 static const char *d_set(const char *);
 static const char *d_text(const char *);
@@ -70,9 +71,9 @@ static struct direc {
   const char *name;
   const char *(*fun)(const char *);
 } s_directab[] = {
-    {"BLOCK", d_block},   {"BYTE", d_byte},   {"CHK", d_chk},       {"CODES", d_codes}, {"DB", d_byte},   {"DW", d_word},         {"ECHO", d_echo},       {"EJECT", d_eject},
-    {"END", d_end},       {"EQU", d_equ},     {"EXPORT", d_export}, {"FILL", d_fill},   {"LIST", d_list}, {"LSFIRST", d_lsfirst}, {"MSFIRST", d_msfirst}, {"NOCODES", d_nocodes},
-    {"NOLIST", d_nolist}, {"NOPAGE", d_null}, {"ORG", d_org},       {"PAGE", d_null},   {"SET", d_set},   {"TEXT", d_text},       {"TITLE", d_title},     {"WORD", d_word},
+    {"BLOCK", d_block}, {"BYTE", d_byte},     {"CHK", d_chk},   {"CODES", d_codes}, {"DB", d_byte},         {"DW", d_word},       {"ECHO", d_echo},       {"EJECT", d_eject},     {"END", d_end},
+    {"EQU", d_equ},     {"EXPORT", d_export}, {"FILL", d_fill}, {"LIST", d_list},   {"LSFIRST", d_lsfirst}, {"MODULE", d_module}, {"MSFIRST", d_msfirst}, {"NOCODES", d_nocodes}, {"NOLIST", d_nolist},
+    {"NOPAGE", d_null}, {"ORG", d_org},       {"PAGE", d_null}, {"SET", d_set},     {"TEXT", d_text},       {"TITLE", d_title},   {"WORD", d_word},
 };
 
 /* The target. */
@@ -445,6 +446,20 @@ static const char *d_end(const char *p) {
   } else {
     return q;
   }
+}
+
+static const char *d_module(const char *p) {
+  p = sync(p);
+  while (*p != '\0' && *p != '\\') {
+    if (!isspace(*p)) {
+      wprint(_("invalid characters after directive\n"));
+      eprcol(s_pline, p);
+      return sync(p);
+    } else {
+      p++;
+    }
+  }
+  return p;
 }
 
 static const char *d_codes(const char *p) {

@@ -10,6 +10,10 @@ etp="$builddir"/$nom.etp
 
 rm -f $obj
 
+echo
+echo "(cd \"$(pwd)\" && $uz80as $asm 2>$etp)"
+echo
+
 $uz80as $asm 2>$etp
 
 # Remove \r and remove leading path in error strings.
@@ -18,6 +22,7 @@ s_esc="$(echo "$srcdir"/ | sed 's/[]\\.$*{}|+?()[^-]/\\&/g')"
 tr -d '\r' <$etp | sed 's|^'$s_esc'||' >$err
 rm -f $etp
 
+touch $lst
 tr -d '\r' <$lst >$ltp
 mv -f $ltp $lst
 rm -f $ltp

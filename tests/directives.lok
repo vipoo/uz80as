@@ -8,4 +8,37 @@
 0008   0000             #DEFCONT \                      LD      C, 09H
 0009   0000             #DEFCONT \                      CALL    0005H
 0010   0000             
-0011   0000             	.END
+0011   0000 11 08 00     	multilinemacro(mystring)
+0011   0003 0E 09       
+0011   0005 CD 05 00    
+0012   0008             
+0013   0008 73 6F 6D 65 mystring  .BYTE		"some string"
+0013   000C 20 73 74 72 
+0013   0010 69 6E 67 
+0014   0013             
+0015   0013                 .module MenuInfo
+0016   0013             MenuInfo
+0017   0013 00 00       _alpha: .dw 0
+0018   0015 3E 03           ld a, 3
+0019   0017             
+0020   0017             #DEFINE PIOMIVT(PIOIN,PIOIST,PIOPRT)    \
+0021   0017             #DEFCONT \  LD  A,(0000)
+0022   0017             
+0023   0017             PIOIVT0:.MODULE PIOIVT0
+0024   0017             PIOMIVT(PIO0IN,PI0_IST,PRTTAB+0)
+0024   0017             
+0024   0017 3A 00 00    
+0025   001A             PIOIVT1:.MODULE PIOIVT1
+0026   001A             PIOMIVT(PIO1IN,PI1_IST,PRTTAB+1)
+0026   001A             
+0026   001A 3A 00 00    
+0027   001D             PIOIVT2:.MODULE PIOIVT2
+0028   001D             PIOMIVT(PIO2IN,PI2_IST,PRTTAB+2)
+0028   001D             
+0028   001D 3A 00 00    
+0029   0020             PIOIVT3:.MODULE PIOIVT3
+0030   0020             PIOMIVT(PIO3IN,PI3_IST,PRTTAB+3)
+0030   0020             
+0030   0020 3A 00 00    
+0031   0023             
+0032   0023             	.END
