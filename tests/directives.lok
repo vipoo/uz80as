@@ -1,0 +1,6 @@
+0001   0000             	.ORG 0
+0002   0000             VALUE	.EQU	123
+0003   0000             VALUE	.EQU	123
+0004   0000             VALUE	.SET	124
+0005   0000             VALUE	.SET	125
+0006   0000             	.END

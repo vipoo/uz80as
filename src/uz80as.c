@@ -55,6 +55,7 @@ static const char *d_msfirst(const char *);
 static const char *d_nocodes(const char *);
 static const char *d_nolist(const char *);
 static const char *d_org(const char *);
+static const char *d_set(const char *);
 static const char *d_text(const char *);
 static const char *d_title(const char *);
 static const char *d_word(const char *);
@@ -89,6 +90,7 @@ static struct direc {
 	{ "NOPAGE", d_null },
 	{ "ORG", d_org },
 	{ "PAGE", d_null },
+	{ "SET", d_set },
 	{ "TEXT", d_text },
 	{ "TITLE", d_title },
 	{ "WORD", d_word },
@@ -543,6 +545,31 @@ static const char *d_equ(const char *p)
 	return p;
 }
 
+static const char *d_set(const char *p)
+{
+	int n;
+	enum expr_ecode ecode;
+	const char *ep;
+
+	p = expr(p, &n, s_pc, 0, &ecode, &ep);
+	if (p == NULL) {
+		exprint(ecode, s_pline, ep);
+		newerr();
+		return NULL;
+	}
+
+	if (s_lastsym == NULL) {
+		eprint(_(".EQU without label\n"));
+		eprcol(s_pline, s_pline_ep);
+		newerr();
+	} else {
+		/* TODO: check label misalign? */
+		s_lastsym->val = n;
+		s_lastsym->isequ = 1;
+	}
+	return p;
+}
+
 static const char *d_export(const char *p)
 {
 	/* TODO */
@@ -794,7 +821,7 @@ static const char *d_chk(const char *p)
 static const char *parse_direc(const char *cp)
 {
 	const char *cq, *p;
-	int a, b, m;
+	int a, b, m = 0;
 
 	a = 0;
 	b = NELEMS(s_directab) - 1;

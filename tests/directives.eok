@@ -1,0 +1,3 @@
+directives.asm:3: warning: duplicate label (VALUE)
+directives.asm:4: warning: duplicate label (VALUE)
+directives.asm:5: warning: duplicate label (VALUE)

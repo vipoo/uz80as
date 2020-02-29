@@ -1,0 +1,4 @@
+#!/bin/sh
+nom=directives
+#uz80as="$uz80as"
+. "$srcdir"/chkall.inc
