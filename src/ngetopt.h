@@ -16,25 +16,24 @@
  */
 
 struct ngetopt_opt {
-	const char *name;
-	int has_arg;
-	int val;
+  const char *name;
+  int         has_arg;
+  int         val;
 };
 
 struct ngetopt {
-	char *optstr;
-	char *optarg;
-	/* private */
-	int optind;
-	int argc;
-	char *const *argv;
-	struct ngetopt_opt *ops;
-	int subind;
-	char str[3];
+  char *optstr;
+  char *optarg;
+  /* private */
+  int                 optind;
+  int                 argc;
+  char *const *       argv;
+  struct ngetopt_opt *ops;
+  int                 subind;
+  char                str[3];
 };
 
-void ngetopt_init(struct ngetopt *p, int argc, char *const *argv,
-	struct ngetopt_opt *ops);
-int ngetopt_next(struct ngetopt *p);
+void ngetopt_init(struct ngetopt *p, int argc, char *const *argv, struct ngetopt_opt *ops);
+int  ngetopt_next(struct ngetopt *p);
 
 #endif

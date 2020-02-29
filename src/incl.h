@@ -14,15 +14,15 @@
 #endif
 
 struct incfile {
-	struct incfile *prev;
-	FILE *fin;
-	int linenum;
-	char *name;
+  struct incfile *prev;
+  FILE *          fin;
+  int             linenum;
+  char *          name;
 };
 
-void pushfile(const char *p, const char *q);
-void popfile(void);
+void            pushfile(const char *p, const char *q);
+void            popfile(void);
 struct incfile *curfile(void);
-int nfiles(void);
+int             nfiles(void);
 
 #endif

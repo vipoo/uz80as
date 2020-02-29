@@ -10,18 +10,18 @@
 
 /* Predefined macro at the command line. */
 struct predef {
-	struct predef *next;
-	const char *name;
+  struct predef *next;
+  const char *   name;
 };
 
-extern const char *s_asmfname;
-extern const char *s_objfname;
-extern const char *s_lstfname;
-extern const char *s_target_id;
-extern int s_listing;
-extern int s_extended_op;
-extern int s_undocumented_op;
-extern int s_mem_fillval;
+extern const char *   s_asmfname;
+extern const char *   s_objfname;
+extern const char *   s_lstfname;
+extern const char *   s_target_id;
+extern int            s_listing;
+extern int            s_extended_op;
+extern int            s_undocumented_op;
+extern int            s_mem_fillval;
 extern struct predef *s_predefs;
 
 void predefine(const char *name);

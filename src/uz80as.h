@@ -12,8 +12,8 @@ extern int verbose;
 
 /* matchtab.flags */
 enum {
-	MATCH_F_UNDOC = 1,
-	MATCH_F_EXTEN = 2,
+  MATCH_F_UNDOC = 1,
+  MATCH_F_EXTEN = 2,
 };
 
 /* pat:
@@ -35,28 +35,28 @@ enum {
  */
 
 struct matchtab {
-	const char *pat;
-	const char *gen;
-	unsigned char mask;
-	unsigned char undoc;
-	const char *pr;
+  const char *  pat;
+  const char *  gen;
+  unsigned char mask;
+  unsigned char undoc;
+  const char *  pr;
 };
 
 struct target {
-	const char *id;
-	const char *descr;
-	const struct matchtab *matcht;
-	int (*matchf)(char c, const char *p, const char **q);
-	int (*genf)(int *eb, char p, const int *vs, int i, int savepc);
-	void (*pat_char_rewind)(int c);
-	const char * (*pat_next_str)(void);
-	unsigned char mask;
+  const char *           id;
+  const char *           descr;
+  const struct matchtab *matcht;
+  int (*matchf)(char c, const char *p, const char **q);
+  int (*genf)(int *eb, char p, const int *vs, int i, int savepc);
+  void (*pat_char_rewind)(int c);
+  const char *(*pat_next_str)(void);
+  unsigned char mask;
 };
 
 extern const char *s_pline_ep;
 
 void genb(int b, const char *ep);
-int mreg(const char *p, const char *const list[], const char **r);
+int  mreg(const char *p, const char *const list[], const char **r);
 
 void uz80as(void);
 
