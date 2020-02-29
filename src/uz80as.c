@@ -38,6 +38,7 @@
 #include <string.h>
 #endif
 
+static const char *d_align(const char *);
 static const char *d_block(const char *);
 static const char *d_byte(const char *);
 static const char *d_chk(const char *);
@@ -73,6 +74,7 @@ static struct direc {
   const char *name;
   const char *(*fun)(const char *);
 } s_directab[] = {
+    { "ALIGN",    d_align   },
     { "BLOCK",    d_block   },
     { "BYTE",     d_byte    },
     { "CHK",      d_chk     },
@@ -792,6 +794,32 @@ static const char *d_text(const char *p) {
 }
 
 static const char *d_title(const char *p) { return NULL; }
+
+static const char *d_align(const char *p) {
+  int             n;
+  enum expr_ecode ecode;
+  const char *    ep, *eps;
+
+  eps = p;
+  p   = expr(p, &n, s_pc, 0, &ecode, &ep);
+  if (p == NULL) {
+    exprint(ecode, s_pline, ep);
+    newerr();
+    return NULL;
+  }
+
+  if (n < 0) {
+    eprint(_("align is negative (%d)\n"), n);
+    eprcol(s_pline, eps);
+    exit(EXIT_FAILURE);
+  }
+
+  while (s_pc % n) {
+    genb(0, eps);
+  }
+
+  return p;
+}
 
 static const char *d_block(const char *p) {
   int             n;

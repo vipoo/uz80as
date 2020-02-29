@@ -33,4 +33,9 @@ DelyCnt .DS 1
 CurESld .DS 2
 CurEDel .DS 1
 
+  .align 4
+  .text "foo"
+  .align 16
+  .text "bar"
+
 	.END
