@@ -51,6 +51,7 @@ static const struct matchtab s_matchtab_z80[] = {
     {"LD p,p", "DD.40b0c1.", 1, 1},
     {"LD q,q", "FD.40b0c1.", 1, 1},
     {"LD b,(HL)", "46b0.", 3, 0},
+    {"LD b,(e)", "d1.46b0.00.", 3, 0, "ii"},
     {"LD b,(ca)", "d1.46b0.d2.", 3, 0, "ii"},
     {"LD A,I", "ED.57.", 3, 0},
     {"LD A,R", "ED.5F.", 3, 0},
@@ -73,7 +74,9 @@ static const struct matchtab s_matchtab_z80[] = {
     {"LD (HL),a", "36.d0.", 3, 0, "e8"},
     {"LD (BC),A", "02.", 3, 0},
     {"LD (DE),A", "12.", 3, 0},
+    {"LD (e),b", "d0.70c1.00.", 3, 0, "ii"},
     {"LD (ca),b", "d0.70c2.d1.", 3, 0, "ii"},
+    {"LD (e),a", "d0.36.00.d1.", 3, 0, "iie8"},
     {"LD (ca),a", "d0.36.d1.d2.", 3, 0, "iie8"},
     {"LD (a),A", "32.e0", 3, 0},
     {"LD (a),HL", "22.e0", 3, 0},
@@ -118,6 +121,7 @@ static const struct matchtab s_matchtab_z80[] = {
     {"h q", "FD.04b1c0.", 1, 1},
     {"h (HL)", "34c0.", 3, 0},
     {"h (ca)", "d1.34c0.d2.", 3, 0, "ii"},
+    {"h (e)", "d1.34c0.00.", 3, 0, "ii"},
     {"INC d", "03f0.", 3, 0},
     {"INC e", "d0.23.", 3, 0},
     {"DEC d", "0Bf0.", 3, 0},
@@ -221,6 +225,8 @@ static int indval(const char *p, int disp, const char **q) {
   v = mreg(p, cval, &r);
   if (v >= 0) {
     v = (v == 0) ? 0xDD : 0xFD;
+    while (*r == ' ')
+      r++;
     if (!disp || *r == '+' || *r == '-') {
       *q = r;
       return v;
