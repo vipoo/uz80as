@@ -22,13 +22,15 @@ script:
   - make
 
 before_deploy:
-  - mv ./src/uz80as ./uz80as
+  - mkdir -p bin
+  - mv ./src/uz80as ./bin/uz80as
+  - tar -czvf uz80as-${TRAVIS_TAG}.tar.gz bin
 
 deploy:
   provider: releases
   api_key:
     secure: "CLLXQy5wo62UkYAul/yHd/MoLhxqhs7qnb2OAC2rZIfnBSZLU0uDGRDZBbzUFuKWYsZE8+crX4VvB4SQLiUnEJTFHi2Yu+AuFr5BGPl2yCCLCvWK3+eWAIgVBUsCG/z+erv6KOxHs/bZhGMGcVJCwMoSg4VO2AwNnDedgGEW2f03vkVFEl2ooISHG4xxBQT2z4EfG/wcFvscV5H4xwdM3jWJQMXOWwham6gsqrUDsBtQmxFvqS72lMDVLC8m9EZUFEaEGSbxPPUU1qUF2ZYNA9NlcPHf+cYlu1KujIuOLb511esQ7Co4HY1d5eMzjbvb2zhOItm8V/SWu5udsiTzyUcVWo4wWMlIk9b0HSBHZ9Ozx8o34u+Xa+eUUxAh08rhwrfbBaTIdkuE9HHH80Odp2EcblHvpyvlWTboBdt3IrIVwSbh8vkJf3UFbqIuIQkpgQCCrctVaBsxV++UQFdpnPxgwLlKXzCbh5TDC3DMHX1v+M7EQK8dNlSeTxPY9FIVDfQqbAA3G84VjMYhn40xyZcNIFOKPyWCm1neXFe1D8h4I8fDvebSBbGJ40zidTQGCfR9wycj5Iy0hYiMqJzQThBh5o4ffGiSBq2B8Xl9ix2lezWYt8HOrQ7jW5q8M4irLU1oV+ZqdZ9gY/BJdAutZEAt0xY2OdJQLjjlBbA4Jas="
-  file: uz80as
+  file: uz80as-${TRAVIS_TAG}.tar.gz
   skip_cleanup: true
   on:
     tags: true
